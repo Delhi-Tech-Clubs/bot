@@ -1,7 +1,6 @@
-require("dotenv").config();
-const http = require("http");
-
-const { Client, GatewayIntentBits } = require("discord.js");
+import "dotenv/config";
+import http from "http";
+import { Client, GatewayIntentBits } from "discord.js";
 
 const bot = new Client({
   intents: [
