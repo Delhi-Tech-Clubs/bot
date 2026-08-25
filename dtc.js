@@ -1,4 +1,5 @@
 require("dotenv").config();
+const http = require("http");
 
 const { Client, GatewayIntentBits } = require("discord.js");
 
@@ -20,5 +21,10 @@ bot.on("messageCreate", async (message) => {
     await message.react("🇨");
   }
 });
+
+http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end("DTC");
+}).listen(process.env.PORT || 3000, "0.0.0.0");
 
 bot.login(process.env.TOKEN);
