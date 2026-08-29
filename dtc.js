@@ -35,6 +35,15 @@ dtc.on("messageCreate", (message) => {
   }
 });
 
+dtc.on("messageCreate", (message) => {
+  if (message.author.bot) return;
+
+  if (message.content === "!github") {
+    message.reply("[GitHub](https://github.com/Delhi-Tech-Clubs)");
+    message.react("dtcc:1542895871610462248");
+  }
+});
+
 cron.schedule("0 9 * * *", () => announce(dtc), { timezone: "Asia/Kolkata" });
 
 http.createServer((req, res) => {
