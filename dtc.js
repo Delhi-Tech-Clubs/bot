@@ -4,7 +4,7 @@ import { Client, GatewayIntentBits } from "discord.js";
 import cron from "node-cron";
 import { tune } from "./birthday.js";
 import { announce } from "./announce.js";
-import { count } from './count.js';
+import { init, count } from './count.js';
 
 const dtc = new Client({
   intents: [
@@ -13,6 +13,8 @@ const dtc = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
+
+dtc.once("ready", () => init(dtc));
 
 dtc.on("messageCreate", async (message) => {
   if (message.author.bot) return;
