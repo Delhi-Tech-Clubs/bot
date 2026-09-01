@@ -51,8 +51,14 @@ dtc.on("messageCreate", (message) => {
 cron.schedule("0 9 * * *", () => announce(dtc), { timezone: "Asia/Kolkata" });
 
 http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end("DTC");
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.end(`
+    <body bgcolor="#0d0d0d">
+      <center>
+        <img src="https://s6.imgcdn.dev/Y8k6ut.png">
+      </center>
+    </body>
+  `);
 }).listen(process.env.PORT || 3000, "0.0.0.0");
 
 dtc.login(process.env.TOKEN);
