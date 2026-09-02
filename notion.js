@@ -3,9 +3,7 @@ import { Client } from "@notionhq/client";
 
 //https://mud-icicle-618.notion.site/3c9321b7ba0480abb79dd71e35c2841a?v=3c9321b7ba0480d0a7cb000caecdd852&source=copy_link
 
-const notion = new Client({
-  auth: process.env.NOTION_API,
-});
+const notion = new Client({ auth: process.env.NOTION_API });
 
 /*
 (async () => {
@@ -14,7 +12,7 @@ const notion = new Client({
 })();
 */
 
-async function createEntry(discordId, bdate) {
+export async function createEntry(discordId, bdate) {
   await notion.pages.create({
     parent: {
       type: "data_source_id",
@@ -27,7 +25,7 @@ async function createEntry(discordId, bdate) {
   });
 }
 
-async function getEntries() {
+export async function getEntries() {
   const result = await notion.dataSources.query({
     data_source_id: process.env.NOTION_DATA_SOURCE_ID,
   });
@@ -38,7 +36,7 @@ async function getEntries() {
   }));
 }
 
-async function updateEntry(discordId, bdate) {
+export async function updateEntry(discordId, bdate) {
   const result = await notion.dataSources.query({
     data_source_id: process.env.NOTION_DATA_SOURCE_ID,
     filter: { property: "discordid", title: { equals: discordId } },
@@ -55,5 +53,3 @@ async function updateEntry(discordId, bdate) {
 
   return true;
 }
-
-export { createEntry, getEntries, updateEntry };

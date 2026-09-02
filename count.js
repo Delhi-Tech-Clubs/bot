@@ -1,14 +1,17 @@
-const channel_id = '1540568102490742875';
+const channel_id = "1540568102490742875";
 let c;
 
 export async function init(client) {
-  const channel = await client.channels.fetch(channel_id);
-  const last = (await channel.messages.fetch({ limit: 1 })).first();
-  c = last ? Number(last.content.trim()) + 1 : 1;
-  //testing..
-  console.log(`Count initialized: ${c}`);
+  try {
+    const channel = await client.channels.fetch(channel_id);
+    const last = (await channel.messages.fetch({ limit: 1 })).first();
+    c = last ? Number(last.content.trim()) + 1 : 1;
+    //testing..
+    console.log(`Count initialized: ${c}`);
+  } catch (err) {
+    console.error(err);
+  }
 }
-
 
 export async function count(message) {
   if (message.author.bot || message.channel.id !== channel_id) return;
@@ -16,9 +19,9 @@ export async function count(message) {
   const num = Number(message.content.trim());
 
   if (num === c) {
-    await message.react("dtcc:1542895871610462248");
+    message.react("dtcc:1542895871610462248").catch(console.error);
     c++;
   } else if (!isNaN(num)) {
-    await message.delete();
+    message.delete().catch(console.error);
   }
 }
