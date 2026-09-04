@@ -12,7 +12,7 @@ export async function tune(message) {
   try {
     const updated = await updateEntry(discordId, bdate);
     if (!updated) await createEntry(discordId, bdate);
-    message.react("dtcc:1542895871610462248").catch(console.error);
+    message.react("dtcc:1542895871610462248");
   } catch (err) {
     console.error(err);
   }
