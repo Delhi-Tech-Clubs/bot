@@ -8,5 +8,5 @@ export async function onboard(member) {
     `- Tune your birthday in <#1542513130805010562>\n` +
     `- Check out count in <#1540568102490742875>`
   );
-  msg.react("dtcc:1542895871610462248");
+  //msg.react("dtcc:1542895871610462248");
 }
