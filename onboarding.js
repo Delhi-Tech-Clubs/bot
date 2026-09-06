@@ -5,6 +5,7 @@ export async function onboard(member) {
 
   const msg = await channel.send(
     `Welcome to DTC <@${member.id}>!\n` +
+    `- Introduce yourself in <#1539259097885577226>\n` +
     `- Tune your birthday in <#1542513130805010562>\n` +
     `- Check out count in <#1540568102490742875>`
   );
