@@ -5,6 +5,7 @@ import { tune } from "./birthday.js";
 import { announce } from "./announce.js";
 import { count } from "./count.js";
 import { onboard } from "./onboarding.js";
+import http from 'http';
 
 process.on("unhandledRejection", console.error);
 
@@ -52,5 +53,10 @@ dtc.on("messageCreate", (message) => {
 });
 
 cron.schedule("0 9 * * *", () => announce(dtc), { timezone: "Asia/Kolkata" });
+
+http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end('dtc');
+}).listen(process.env.PORT || 3000);
 
 dtc.login(process.env.TOKEN);
