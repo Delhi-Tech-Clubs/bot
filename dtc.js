@@ -20,36 +20,43 @@ const dtc = new Client({
 
 dtc.on("guildMemberAdd", onboard);
 
-dtc.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
-
-  if (["dtc", "Dtc", "DTC"].includes(message.content)) {
-    message.react("❤️");
-    message.react("🇩");
-    message.react("🇹");
-    message.react("🇨");
-  }
-});
+// dtc.on("messageCreate", async (message) => {
+//   if (message.author.bot) return;
+//
+//   if (["dtc", "Dtc", "DTC"].includes(message.content)) {
+//     message.react("❤️");
+//     message.react("🇩");
+//     message.react("🇹");
+//     message.react("🇨");
+//   }
+// });
 
 dtc.on("messageCreate", tune);
 dtc.on("messageCreate", count);
 
-dtc.on("messageCreate", (message) => {
+// dtc.on("messageCreate", (message) => {
+//   if (message.author.bot) return;
+//
+//   if (message.content === "!link") {
+//     message.channel.send("[GitHub](https://github.com/Delhi-Tech-Clubs)");
+//     message.react("dtcc:1542895871610462248");
+//   }
+// });
+
+// dtc.on("messageCreate", (message) => {
+//   if (message.author.bot) return;
+//
+//   if (message.content === "!github") {
+//     message.channel.send("[GitHub](https://github.com/Delhi-Tech-Clubs)");
+//     message.react("dtcc:1542895871610462248");
+//   }
+// });
+
+dtc.on("messageCreate", async (message) => {
   if (message.author.bot) return;
-
-  if (message.content === "!link") {
-    message.channel.send("[GitHub](https://github.com/Delhi-Tech-Clubs)");
-    message.react("dtcc:1542895871610462248");
-  }
-});
-
-dtc.on("messageCreate", (message) => {
-  if (message.author.bot) return;
-
-  if (message.content === "!github") {
-    message.channel.send("[GitHub](https://github.com/Delhi-Tech-Clubs)");
-    message.react("dtcc:1542895871610462248");
-  }
+  if (!message.content.startsWith("dtc bol ")) return;
+  await message.channel.send(message.content.slice(8));
+  await message.delete();
 });
 
 cron.schedule("0 9 * * *", () => announce(dtc), { timezone: "Asia/Kolkata" });
