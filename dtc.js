@@ -18,6 +18,10 @@ const dtc = new Client({
   ],
 });
 
+dtc.once("ready", () => {
+  dtc.user.setStatus("dnd");
+});
+
 dtc.on("guildMemberAdd", onboard);
 
 // dtc.on("messageCreate", async (message) => {
