@@ -21,9 +21,10 @@
 // }
 
 
+
 const channel_id = "1540568102490742875";
 const OK_EMOJI_ID = "1542895871610462248";
-const BAD_EMOJI_ID = "1561706579630235761";
+const BAD_EMOJI_ID = "1560344031777783908";
 
 let current = -1;
 let lastUser = null;
@@ -68,7 +69,6 @@ export async function count(message) {
   if (num === current + 1 && !sameUser) {
     current = num;
     lastUser = message.author.id;
-
     await message.react(`dtcc:${OK_EMOJI_ID}`).catch(() => {});
   } else {
     const broke = current;
