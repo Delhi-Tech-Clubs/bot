@@ -59,7 +59,14 @@ dtc.on("messageCreate", count);
 dtc.on("messageCreate", async (message) => {
   if (message.author.bot) return;
   if (!message.content.startsWith("dtc bol ")) return;
-  await message.channel.send(message.content.slice(8));
+
+  const user = message.author;
+  const content = message.content.slice(8);
+  const channel = message.channel;
+
+  console.log(`[dtc bol] User: ${user.tag} (ID: ${user.id}) | Channel: #${channel.name} (ID: ${channel.id}) | Message: "${content}"`);
+
+  await message.channel.send(content);
   await message.delete();
 });
 
