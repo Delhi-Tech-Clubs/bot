@@ -7,7 +7,7 @@ export async function git(message) {
 
   try {
     const res = await fetch(
-      `https://api.github.com/orgs/Delhi-Tech-Clubs/memberships/${username}`,
+      `https://api.github.com/orgs/Delhi-Tech-Clubs/memberships/${encodeURIComponent(username)}`,
       {
         method: "PUT",
         headers: {
