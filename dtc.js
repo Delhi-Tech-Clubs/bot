@@ -6,6 +6,7 @@ import { announce } from "./announce.js";
 import { count } from "./count.js";
 import { onboard } from "./onboarding.js";
 import { club } from "./club.js";
+import { git } from "./git.js";
 import http from 'http';
 
 process.on("unhandledRejection", console.error);
@@ -39,6 +40,7 @@ dtc.on("guildMemberAdd", onboard);
 dtc.on("messageCreate", tune);
 dtc.on("messageCreate", count);
 dtc.on("messageCreate", club);
+dtc.on("messageCreate", git);
 
 // dtc.on("messageCreate", (message) => {
 //   if (message.author.bot) return;
