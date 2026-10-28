@@ -11,6 +11,8 @@ import http from 'http';
 
 process.on("unhandledRejection", console.error);
 
+const HQ = "1539307092366725190";
+
 const dtc = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -25,51 +27,24 @@ dtc.once("ready", () => {
 });
 
 dtc.on("guildMemberAdd", onboard);
-
-// dtc.on("messageCreate", async (message) => {
-//   if (message.author.bot) return;
-//
-//   if (["dtc", "Dtc", "DTC"].includes(message.content)) {
-//     message.react("❤️");
-//     message.react("🇩");
-//     message.react("🇹");
-//     message.react("🇨");
-//   }
-// });
-
 dtc.on("messageCreate", tune);
 dtc.on("messageCreate", count);
 dtc.on("messageCreate", club);
 dtc.on("messageCreate", git);
 
-// dtc.on("messageCreate", (message) => {
-//   if (message.author.bot) return;
-//
-//   if (message.content === "!link") {
-//     message.channel.send("[GitHub](https://github.com/Delhi-Tech-Clubs)");
-//     message.react("dtcc:1542895871610462248");
-//   }
-// });
-
-// dtc.on("messageCreate", (message) => {
-//   if (message.author.bot) return;
-//
-//   if (message.content === "!github") {
-//     message.channel.send("[GitHub](https://github.com/Delhi-Tech-Clubs)");
-//     message.react("dtcc:1542895871610462248");
-//   }
-// });
-
 dtc.on("messageCreate", async (message) => {
   if (message.author.bot) return;
   if (!message.content.startsWith("dtc bol ")) return;
 
-  const user = message.author;
   const content = message.content.slice(8);
-  const channel = message.channel;
+  const hasMentions = message.mentions.everyone || message.mentions.roles.size > 0;
 
-  console.log(`[dtc bol] User: ${user.tag} (ID: ${user.id}) | Channel: #${channel.name} (ID: ${channel.id}) | Message: "${content}"`);
+  if (hasMentions && !message.member.roles.cache.has(HQ)) {
+    await message.delete();
+    return;
+  }
 
+  console.log(`[dtc bol] ${message.author.tag} (${message.author.id}) | #${message.channel.name} | "${content}"`);
   await message.channel.send(content);
   await message.delete();
 });
