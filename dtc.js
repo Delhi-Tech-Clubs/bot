@@ -5,7 +5,7 @@ import { tune } from "./birthday.js";
 import { announce } from "./announce.js";
 import { count } from "./count.js";
 import { onboard } from "./onboarding.js";
-import { club } from "./club.js";
+import { club, clubs } from "./club.js";
 import { git } from "./git.js";
 import http from 'http';
 
@@ -30,6 +30,7 @@ dtc.on("guildMemberAdd", onboard);
 dtc.on("messageCreate", tune);
 dtc.on("messageCreate", count);
 dtc.on("messageCreate", club);
+dtc.on("messageCreate", clubs);
 dtc.on("messageCreate", git);
 
 dtc.on("messageCreate", async (message) => {

@@ -2,6 +2,21 @@ import { PermissionFlagsBits } from "discord.js";
 
 const HQ = "1539307092366725190";
 
+export async function clubs(message) {
+  if (message.author.bot || !message.guild) return;
+  if (message.content.trim() !== "dtc clubs") return;
+
+  const list = message.guild.channels.cache
+    .filter((c) => c.parentId === "1539259832899473472")
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map((c) => c.name)
+    .join("\n");
+
+  if (!list) return;
+  await message.channel.send(list);
+  await message.react("dtcc:1542895871610462248");
+}
+
 export async function club(message) {
   if (message.author.bot || !message.guild) return;
   if (!message.content.startsWith("dtc +club ")) return;
