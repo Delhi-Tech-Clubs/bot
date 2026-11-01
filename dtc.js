@@ -2,7 +2,7 @@ import "dotenv/config";
 import { Client, GatewayIntentBits } from "discord.js";
 import cron from "node-cron";
 import { tune } from "./birthday.js";
-import { announce } from "./announce.js";
+import { announce, removeBirthdayRoles } from "./announce.js";
 import { count } from "./count.js";
 import { onboard } from "./onboarding.js";
 import { club, clubs } from "./club.js";
@@ -51,6 +51,7 @@ dtc.on("messageCreate", async (message) => {
 });
 
 cron.schedule("0 9 * * *", () => announce(dtc), { timezone: "Asia/Kolkata" });
+cron.schedule("0 0 * * *", () => removeBirthdayRoles(dtc), { timezone: "Asia/Kolkata" });
 
 http.createServer((req, res) => {
   res.writeHead(200);
