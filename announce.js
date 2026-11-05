@@ -12,7 +12,7 @@ export async function announce(dtc) {
       const [day, month] = entry.bdate.split("/").map(Number);
 
       if (day === today.getDate() && month === today.getMonth() + 1) {
-        channel.send(`@everyone today is <@${entry.discordId}>'s birthday!!`);
+        channel.send(`@here today is <@${entry.discordId}>'s birthday!!`);
 
         const guild = channel.guild;
         const member = await guild.members.fetch(entry.discordId).catch(() => null);
