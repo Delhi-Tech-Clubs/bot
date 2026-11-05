@@ -50,8 +50,10 @@ dtc.on("messageCreate", async (message) => {
   await message.delete();
 });
 
-cron.schedule("0 9 * * *", () => announce(dtc), { timezone: "Asia/Kolkata" });
-cron.schedule("0 0 * * *", () => removeBirthdayRoles(dtc), { timezone: "Asia/Kolkata" });
+cron.schedule("0 0 * * *", async () => {
+  await removeBirthdayRoles(dtc);
+  await announce(dtc);
+}, { timezone: "Asia/Kolkata" });
 
 http.createServer((req, res) => {
   res.writeHead(200);
