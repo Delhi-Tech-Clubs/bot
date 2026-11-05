@@ -27,6 +27,7 @@ export async function announce(dtc) {
 export async function removeBirthdayRoles(dtc) {
   try {
     const guild = await dtc.guilds.fetch(process.env.GUILD_ID);
+    await guild.members.fetch();
     const role = guild.roles.cache.get(BIRTHDAY_ROLE);
     if (!role) return;
 
