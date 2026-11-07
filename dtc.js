@@ -41,13 +41,13 @@ dtc.on("messageCreate", async (message) => {
   const hasMentions = message.mentions.everyone || message.mentions.roles.size > 0;
 
   if (hasMentions && !message.member.roles.cache.has(HQ)) {
-    await message.delete();
+    await message.delete().catch(() => {});
     return;
   }
 
   console.log(`[dtc bol] ${message.author.tag} (${message.author.id}) | #${message.channel.name} | "${content}"`);
-  await message.channel.send(content);
-  await message.delete();
+  await message.channel.send(content).catch(() => {});
+  await message.delete().catch(() => {});
 });
 
 cron.schedule("0 0 * * *", async () => {
