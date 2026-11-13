@@ -7,6 +7,7 @@ import { count } from "./count.js";
 import { onboard } from "./onboarding.js";
 import { club, clubs } from "./club.js";
 import { git } from "./git.js";
+import { boardsCountdown } from "./boards.js";
 import http from 'http';
 
 process.on("unhandledRejection", console.error);
@@ -53,6 +54,7 @@ dtc.on("messageCreate", async (message) => {
 cron.schedule("0 0 * * *", async () => {
   await removeBirthdayRoles(dtc);
   await announce(dtc);
+  await boardsCountdown(dtc);
 }, { timezone: "Asia/Kolkata" });
 
 http.createServer((req, res) => {
