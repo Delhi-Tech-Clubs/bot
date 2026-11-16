@@ -52,9 +52,12 @@ dtc.on("messageCreate", async (message) => {
 });
 
 cron.schedule("0 0 * * *", async () => {
-  await removeBirthdayRoles(dtc);
   await announce(dtc);
   await boardsCountdown(dtc);
+}, { timezone: "Asia/Kolkata" });
+
+cron.schedule("59 23 * * *", async () => {
+  await removeBirthdayRoles(dtc);
 }, { timezone: "Asia/Kolkata" });
 
 http.createServer((req, res) => {
